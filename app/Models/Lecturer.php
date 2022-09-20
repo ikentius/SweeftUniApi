@@ -11,7 +11,7 @@ class Lecturer extends Model
 
     public function user()
     {
-        return $this->hasOne(User::Class);
+        return $this->belongsTo(User::Class);
     }
 
     public function subjects()

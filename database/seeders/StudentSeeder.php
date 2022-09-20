@@ -21,7 +21,10 @@ class StudentSeeder extends Seeder
 
         foreach(Student::all() as $student)
         {
-            $subjects = Subject::inRandomOrder()->take(rand(1,2))->pluck('id');
+            $subjects = Subject::inRandomOrder()->where('major_id',$student->major_id)
+                ->where('course_id',$student->course_id)
+                ->take(rand(1,3))
+                ->pluck('id');
             $student->subjects()->attach($subjects);
         }
     }

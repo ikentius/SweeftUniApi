@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
+use App\Models\User;
 
 class StudentController extends Controller
 {
@@ -15,7 +17,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return Student::with('user','major','course','subjects')->get();
     }
 
     /**
@@ -47,7 +49,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+         return new StudentResource($student->load(['user','major','course','subjects.lecturer.user']));
+       //return  $student->load(['user','major','course','subjects.lecturer']);
     }
 
     /**

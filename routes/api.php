@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResources([
+    'students' => \App\Http\Controllers\StudentController::class,
+    'lecturers' => \App\Http\Controllers\LecturerController::class
+]);
+
+Route::get('/courses',\App\Http\Controllers\CourseController::class);
