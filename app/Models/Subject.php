@@ -9,7 +9,17 @@ class Subject extends Model
 {
     use HasFactory;
 
-    public function students(){
+    public function students()
+    {
         return $this->belongsToMany(Student::class);
+    }
+
+    public function lecturer()
+    {
+        return $this->belongsTo(Lecturer::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
     }
 }

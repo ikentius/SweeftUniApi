@@ -15,6 +15,6 @@ class LecturerSeeder extends Seeder
      */
     public function run()
     {
-        Lecturer::factory()->count(3)->hasSubjects(5)->create();
+        Lecturer::factory()->count(10)->hasSubjects(6)->create();
     }
 }

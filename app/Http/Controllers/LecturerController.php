@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLecturerRequest;
 use App\Http\Requests\UpdateLecturerRequest;
+use App\Http\Resources\LecturerCollection;
+use App\Http\Resources\LecturerResource;
 use App\Models\Lecturer;
 
 class LecturerController extends Controller
@@ -15,18 +17,9 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        return new LecturerCollection(Lecturer::with('user','subjects')->get());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -47,19 +40,10 @@ class LecturerController extends Controller
      */
     public function show(Lecturer $lecturer)
     {
-        //
+        return new LecturerResource($lecturer->load(['user', 'subjects']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lecturer  $lecturer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Lecturer $lecturer)
-    {
-        //
-    }
+
 
     /**
      * Update the specified resource in storage.
