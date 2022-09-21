@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateLecturerRequest;
 use App\Http\Resources\LecturerCollection;
 use App\Http\Resources\LecturerResource;
 use App\Models\Lecturer;
+use App\Models\User;
 
 class LecturerController extends Controller
 {
@@ -29,7 +30,13 @@ class LecturerController extends Controller
      */
     public function store(StoreLecturerRequest $request)
     {
-        //
+        $user = User::create($request->validated());
+        Lecturer::create([
+            'user_id' => $user->id,
+            'bank_account' => $request->bank_account,
+            'level' => $request->level
+        ]);
+
     }
 
     /**
@@ -54,7 +61,10 @@ class LecturerController extends Controller
      */
     public function update(UpdateLecturerRequest $request, Lecturer $lecturer)
     {
-        //
+        $lecturer->user()->update($request->except(['bank_account','level']));
+        $lecturer->update($request->only(['bank_account','level']));
+
+        return response('Success',200);
     }
 
     /**

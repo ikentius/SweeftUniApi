@@ -12,6 +12,5 @@ class CourseController extends Controller
     public function __invoke()
     {
         return new CourseCollection(Course::with('subjects')->get());
-
     }
 }

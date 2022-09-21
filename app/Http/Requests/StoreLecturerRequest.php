@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreLecturerRequest extends FormRequest
 {
+    use UserRules;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +14,7 @@ class StoreLecturerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,9 @@ class StoreLecturerRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return array_merge($this->StoreUserRules(),[
+           'bank_account' => 'required|string',
+            'level' => 'required|in:Lecturer,Master Lecturer, Senior Lecturer'
+        ]);
     }
 }

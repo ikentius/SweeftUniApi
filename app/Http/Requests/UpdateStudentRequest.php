@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateStudentRequest extends FormRequest
 {
+    use UserRules;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +14,7 @@ class UpdateStudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,9 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return array_merge($this->UpdateUserRules(),[
+            'major_id' => 'sometimes|required|integer',
+            'course_id' => 'sometimes|required|integer'
+        ]);
     }
 }
