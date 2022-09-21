@@ -73,8 +73,10 @@ class StudentController extends Controller
      * @param \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function deactivate(Student $student)
     {
-        //
+        $student->user()->update(['active' => false]);
+
+        return response('Success',200);
     }
 }

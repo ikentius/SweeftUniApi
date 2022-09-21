@@ -73,8 +73,10 @@ class LecturerController extends Controller
      * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lecturer $lecturer)
+    public function deactivate(Lecturer $lecturer)
     {
-        //
+        $lecturer->user()->update(['active' => false]);
+
+        return response('Success',200);
     }
 }

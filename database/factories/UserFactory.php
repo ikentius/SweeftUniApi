@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'sex' => fake()->randomElement(['M','F']),
             'address_second' => fake()->optional(0.3 )->address(),
             'apartment_num' =>fake()->numberBetween(1,3000),
+            'active' => fake()->boolean(),
             'remember_token' => Str::random(10),
         ];
     }
