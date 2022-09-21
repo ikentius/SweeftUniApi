@@ -18,9 +18,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources([
-    'students' => \App\Http\Controllers\StudentController::class,
-    'lecturers' => \App\Http\Controllers\LecturerController::class
-]);
 
-Route::get('/courses',\App\Http\Controllers\CourseController::class);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::apiResources([
+        'students' => \App\Http\Controllers\StudentController::class,
+        'lecturers' => \App\Http\Controllers\LecturerController::class
+    ]);
+
+    Route::patch('students/{student}/deactivate', [\App\Http\Controllers\StudentController::class,'deactivate']);
+    Route::patch('lecturers/{lecturer}/deactivate', [\App\Http\Controllers\LecturerController::class,'deactivate']);
+
+    Route::get('/courses',\App\Http\Controllers\CourseController::class);
+});
+
+Route::get('/setup',\App\Http\Controllers\AdminController::class);

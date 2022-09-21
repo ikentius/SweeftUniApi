@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
             Course::factory()->create(['name' => $course]);
         }
 
+        User::factory()->create(['email' => 'bestAdmin@gmail.com' , 'password' => Hash::make('option123'), 'status'=>'s']);
+
         $this->call([
             LecturerSeeder::class,
             StudentSeeder::class

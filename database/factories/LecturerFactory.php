@@ -20,7 +20,7 @@ class LecturerFactory extends Factory
         return [
             'user_id' => User::factory()->create(['status'=>'L'])->id,
             'bank_account' => fake()->iban(),
-            'rank' => fake()->randomElement(['Lecturer','Senior Lecturer','Master Lecturer'])
+            'level' => fake()->randomElement(['Lecturer','Senior Lecturer','Master Lecturer'])
         ];
     }
 }
