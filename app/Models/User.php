@@ -28,6 +28,7 @@ class User extends Authenticatable
         'status',
         'address_second',
         'apartment_num',
+        'password'
     ];
 
     /**
